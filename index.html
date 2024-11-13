@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width">
-
- <title>Acceso a base de datos</title>
-
- <script type="module" src="lib/js/consumeJson.js"></script>
- <script type="module" src="lib/js/muestraObjeto.js"></script>
- <script type="module" src="lib/js/muestraError.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso a base de datos</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom JS Modules -->
+    <script type="module" src="lib/js/consumeJson.js"></script>
+    <script type="module" src="lib/js/muestraObjeto.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
 </head>
+<body onload="consumeJson('srv/Joyas.php')
+    .then(respuesta => muestraObjeto(document, respuesta.body))
+    .catch(muestraError)">
 
-<body onload="consumeJson('srv/pasatiempos.php')
-   .then(respuesta => muestraObjeto(document, respuesta.body))
-   .catch(muestraError)">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Acceso a Base de Datos de Joyas</h1>
 
- <h1>Acceso a base de datos</h1>
+        <div class="text-right mb-4">
+            <a href="agrega.html" class="btn btn-primary">Agregar Nueva Joya</a>
+        </div>
 
- <p><a href="agrega.html">Agregar</a></p>
+        <ul id="lista" class="list-group">
+            <li class="list-group-item">
+                <progress class="w-100" max="100">Cargando&hellip;</progress>
+            </li>
+        </ul>
+    </div>
 
- <ul id="lista">
-  <li><progress max="100">Cargando&hellip;</progress></li>
- </ul>
-
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

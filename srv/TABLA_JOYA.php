@@ -1,0 +1,7 @@
+<?php
+
+const JOYA = "JOYA";
+const JOYA_ID = "JOYA_ID";
+const JOYA_NOMBRE = "JOYA_NOMBRE";
+const JOYA_COLOR = "JOYA_COLOR";
+const JOYA_MATERIAL = "JOYA_MATERIAL";

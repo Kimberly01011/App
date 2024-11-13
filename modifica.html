@@ -2,67 +2,81 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Joya</title>
 
- <meta charset="UTF-8">
- <meta name="viewport"
-   content="width=device-width">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
- <title>Modificar</title>
+    <!-- Custom JS Modules -->
+    <script type="module" src="lib/js/consumeJson.js"></script>
+    <script type="module" src="lib/js/submitForm.js"></script>
+    <script type="module" src="lib/js/muestraObjeto.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
 
- <script type="module" src="lib/js/consumeJson.js"></script>
- <script type="module" src="lib/js/submitForm.js"></script>
- <script type="module" src="lib/js/muestraObjeto.js"></script>
- <script type="module" src="lib/js/muestraError.js"></script>
-
- <script>
-  // Obtiene los parámetros de la página.
-  const params = new URL(location.href).searchParams
- </script>
-
+    <script>
+        // Obtiene los parámetros de la página.
+        const params = new URL(location.href).searchParams;
+    </script>
 </head>
 
 <body onload="if (params.size > 0) {
-   consumeJson('srv/pasatiempo.php?' + params)
-    .then(respuesta => muestraObjeto(forma, respuesta.body))
-    .catch(muestraError)
-  }">
+        consumeJson('srv/joya.php?' + params)
+            .then(respuesta => muestraObjeto(forma, respuesta.body))
+            .catch(muestraError);
+    }">
 
- <form id="forma" onsubmit="submitForm('srv/pasatiempo-modifica.php', event)
-    .then(respuesta => location.href = 'index.html')
-    .catch(muestraError)">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Modificar Joya</h1>
 
-  <h1>Modificar</h1>
+        <form id="forma" class="border p-4 rounded shadow-sm" onsubmit="submitForm('srv/Joya-modifica.php', event)
+            .then(respuesta => location.href = 'index.html')
+            .catch(muestraError)">
 
-  <p><a href="index.html">Cancelar</a></p>
+            <!-- Campo oculto de ID -->
+            <input name="id" type="hidden">
 
-  <input name="id" type="hidden">
+            <!-- Campo de Nombre -->
+            <div class="form-group">
+                <label for="nombre">Nombre *</label>
+                <input type="text" name="nombre" class="form-control" required value="Cargando&hellip;">
+            </div>
 
-  <p>
-   <label>
-    Nombre *
-    <input name="nombre" value="Cargando&hellip;">
-   </label>
-  </p>
+            <!-- Campo de Color -->
+            <div class="form-group">
+                <label for="color">Color *</label>
+                <input type="text" name="color" class="form-control" required value="Cargando&hellip;">
+            </div>
 
-  <p>* Obligatorio</p>
+            <!-- Campo de Material -->
+            <div class="form-group">
+                <label for="material">Material *</label>
+                <input type="text" name="material" class="form-control" required value="Cargando&hellip;">
+            </div>
 
-  <p>
+            <p class="text-muted">* Obligatorio</p>
 
-   <button type="submit">Guardar</button>
+            <!-- Botones de acción -->
+            <div class="d-flex justify-content-between">
+                <a href="index.html" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" onclick="
+                    if (params.size > 0 && confirm('Confirma la eliminación')) {
+                        consumeJson('srv/Joya-elimina.php?' + params)
+                            .then(() => location.href = 'index.html')
+                            .catch(muestraError);
+                    }">
+                    Eliminar
+                </button>
+            </div>
+        </form>
+    </div>
 
-   <button type="button" onclick="
-     if (params.size > 0 && confirm('Confirma la eliminación')) {
-      consumeJson('srv/pasatiempo-elimina.php?' + params)
-       .then(() => location.href = 'index.html')
-       .catch(muestraError)
-     }">
-    Eliminar
-   </button>
-
-  </p>
-
- </form>
-
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
