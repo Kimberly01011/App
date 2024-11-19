@@ -3,6 +3,8 @@
 require_once __DIR__ . "/../lib/php/ejecutaServicio.php";
 require_once __DIR__ . "/../lib/php/recuperaTexto.php";
 require_once __DIR__ . "/../lib/php/validaNombre.php";
+require_once __DIR__ . "/../lib/php/validaColor.php";
+require_once __DIR__ . "/../lib/php/validaMaterial.php";
 require_once __DIR__ . "/../lib/php/insert.php";
 require_once __DIR__ . "/../lib/php/devuelveCreated.php";
 require_once __DIR__ . "/Bd.php";
@@ -19,8 +21,8 @@ error_reporting(E_ALL);
 
     // Validar los datos
     $nombre = validaNombre($nombre);
-    $color = validaNombre($color);
-    $material = validaNombre($material);
+    $color = validaColor(color: $color);
+    $material = validaMaterial($material);
 
     // Obtener la conexión a la base de datos
     $pdo = Bd::pdo();

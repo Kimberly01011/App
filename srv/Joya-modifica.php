@@ -4,6 +4,8 @@ require_once __DIR__ . "/../lib/php/ejecutaServicio.php";
 require_once __DIR__ . "/../lib/php/recuperaIdEntero.php";
 require_once __DIR__ . "/../lib/php/recuperaTexto.php";
 require_once __DIR__ . "/../lib/php/validaNombre.php";
+require_once __DIR__ . "/../lib/php/validaColor.php";
+require_once __DIR__ . "/../lib/php/validaMaterial.php";
 require_once __DIR__ . "/../lib/php/update.php";
 require_once __DIR__ . "/../lib/php/devuelveJson.php";
 require_once __DIR__ . "/Bd.php";
@@ -19,8 +21,8 @@ ejecutaServicio(function () {
 
     // Validar los datos recibidos
     $nombre = validaNombre($nombre);
-    $color = validaNombre($color);
-    $material = validaNombre($material);
+    $color = validaColor(color: $color);
+    $material = validaMaterial(material: $material);
 
     // Actualizar los datos en la tabla JOYA
     update(
